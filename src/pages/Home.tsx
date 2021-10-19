@@ -5,7 +5,7 @@ import { Header } from '../components/Header';
 import { Task, TasksList } from '../components/TasksList';
 import { TodoInput } from '../components/TodoInput';
 
-interface EditTaskProps {
+export interface EditTaskProps {
   taskId: number;
   taskNewTitle: string;
 }
