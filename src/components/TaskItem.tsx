@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Image, TouchableOpacity, View, TextInput , StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -29,10 +29,20 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
     setIsEditing(false);
   }
 
-  function handleConfirmEditing() {
-    setEditedTitle(item.title);
+  function handleSubmitEditing() {
+    editTask({taskId: item.id, taskNewTitle: editedTitle});
     setIsEditing(false);
   }
+
+  useEffect(() => {
+    if (textInputRef.current) {
+      if (isEditing) {
+        textInputRef.current.focus();
+      } else {
+        textInputRef.current.blur();
+      }
+    }
+  }, [isEditing])
 
   return (
     <>

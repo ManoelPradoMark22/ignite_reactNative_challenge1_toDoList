@@ -20,7 +20,7 @@ interface TasksListProps {
   editTask: (({ taskId, taskNewTitle } : EditTaskProps) => void);
 }
 
-export function TasksList({ tasks, toggleTaskDone, removeTask, editTask }: TasksListProps) {
+export function TasksList({ tasks, toggleTaskDone, removeTask, editTask } : TasksListProps) {
   return (
     <FlatList
       data={tasks}
