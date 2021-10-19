@@ -20,7 +20,7 @@ interface TasksListProps {
   editTask: (({ taskId, taskNewTitle } : EditTaskProps) => void);
 }
 
-export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps) {
+export function TasksList({ tasks, toggleTaskDone, removeTask, editTask }: TasksListProps) {
   return (
     <FlatList
       data={tasks}
@@ -35,6 +35,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
               index={index}
               toggleTaskDone={toggleTaskDone}
               removeTask={removeTask}
+              editTask={editTask}
             />
           </ItemWrapper>
         )

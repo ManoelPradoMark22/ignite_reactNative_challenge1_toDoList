@@ -1,8 +1,9 @@
-import React from 'react';
-import { Image, TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { Image, TouchableOpacity, View, TextInput , StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { Task } from '../components/TasksList';
+import { EditTaskProps } from '../pages/Home';
 
 import trashIcon from '../assets/icons/trash/trash.png'
 
@@ -11,9 +12,28 @@ interface TaskItemProps {
   index: number;
   toggleTaskDone: (id: number) => void;
   removeTask: (id: number) => void;
+  editTask: (({ taskId, taskNewTitle } : EditTaskProps) => void);
 }
 
-export function TaskItem({ item, index, toggleTaskDone, removeTask } : TaskItemProps) {
+export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } : TaskItemProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(item.title);
+  const textInputRef = useRef<TextInput>(null);
+
+  function handleStartEditing() {
+    setIsEditing(true);
+  }
+
+  function handleCancelEditing() {
+    setEditedTitle(item.title);
+    setIsEditing(false);
+  }
+
+  function handleConfirmEditing() {
+    setEditedTitle(item.title);
+    setIsEditing(false);
+  }
+
   return (
     <>
       <View>
@@ -36,11 +56,11 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask } : TaskItemP
             )}
           </View>
 
-          <Text 
+          <TextInput  
             style={item.done ? styles.taskTextDone : styles.taskText}
           >
             {item.title}
-          </Text>
+          </TextInput >
         </TouchableOpacity>
       </View>
 
