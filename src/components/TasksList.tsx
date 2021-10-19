@@ -12,10 +12,16 @@ export interface Task {
   done: boolean;
 }
 
+interface EditTaskProps {
+  taskId: number;
+  taskNewTitle: string;
+}
+
 interface TasksListProps {
   tasks: Task[];
   toggleTaskDone: (id: number) => void;
   removeTask: (id: number) => void;
+  editTask: (({ taskId, taskNewTitle } : EditTaskProps) => void)
 }
 
 export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps) {
