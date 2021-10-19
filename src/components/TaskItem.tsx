@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import { Task } from '../components/TasksList';
 import { EditTaskProps } from '../pages/Home';
 
-import trashIcon from '../assets/icons/trash/trash.png'
+import trashIcon from '../assets/icons/trash/trash.png';
+import editIcon from '../assets/icons/edit/edit.png';
 
 interface TaskItemProps {
   item: Task;
@@ -66,21 +67,44 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
             )}
           </View>
 
-          <TextInput  
+          <TextInput
+            ref={textInputRef}
+            value={editedTitle}
+            editable={isEditing}
+            onChangeText={setEditedTitle}
+            onSubmitEditing={handleSubmitEditing}
             style={item.done ? styles.taskTextDone : styles.taskText}
-          >
-            {item.title}
-          </TextInput >
+          />
         </TouchableOpacity>
       </View>
+      
+      <View style={ styles.iconsContainer }>
 
-      <TouchableOpacity
-        testID={`trash-${index}`}
-        style={{ paddingHorizontal: 24 }}
-        onPress={() => removeTask(item.id)}
-      >
-        <Image source={trashIcon} />
-      </TouchableOpacity>
+        { isEditing ? (
+          <TouchableOpacity
+            onPress={handleCancelEditing}
+          >
+            <Icon name="x" size={24} color="#b2b2b2" />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={handleStartEditing}
+          >
+            <Image source={editIcon} />
+          </TouchableOpacity>
+        ) }
+
+        <View style={ styles.iconsDivider } />
+
+        <TouchableOpacity
+          disabled={isEditing}
+          testID={`trash-${index}`}
+          style={{ marginRight: 24 }}
+          onPress={() => removeTask(item.id)}
+        >
+          <Image source={trashIcon} style={{ opacity: isEditing ? 0.2 : 1 }} />
+        </TouchableOpacity>
+      </View>
     </>
   )
 }
@@ -122,5 +146,14 @@ const styles = StyleSheet.create({
     color: '#1DB863',
     textDecorationLine: 'line-through',
     fontFamily: 'Inter-Medium'
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+  },
+  iconsDivider: {
+    width: 1,
+    height: 24,
+    backgroundColor: 'rgba(196, 196, 196, 0.24)',
+    marginHorizontal: 12
   }
 })
