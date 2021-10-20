@@ -1,11 +1,13 @@
 import React from 'react';
-import { FlatList, View, StyleSheet, Dimensions  } from 'react-native';
+import { FlatList, View, StyleSheet, Dimensions, Image } from 'react-native';
 
 import { ItemWrapper } from './ItemWrapper';
 
 import { TaskItem } from './TaskItem';
 
 import { EditTaskProps } from '../pages/Home';
+
+import emptyImage from '../assets/illustrations/emptyBox.png';
 
 export interface Task {
   id: number;
@@ -28,6 +30,9 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask } : Task
       contentContainerStyle={{ paddingBottom: 24 }}
       showsVerticalScrollIndicator={false}
       ListFooterComponent={<View style={styles.footerFlatList}/>}
+      ListEmptyComponent={<View style={styles.imgEmpty}>
+        <Image source={emptyImage}/>
+      </View>}
       renderItem={({ item, index }) => {
         return (
           <ItemWrapper index={index}>
@@ -52,5 +57,9 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask } : Task
 const styles = StyleSheet.create({
   footerFlatList: {
     height: Dimensions.get('screen').height ? Dimensions.get('screen').height/2 : 500,
+  },
+  imgEmpty: {
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
