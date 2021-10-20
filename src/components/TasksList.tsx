@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, StyleSheet, Dimensions  } from 'react-native';
 
 import { ItemWrapper } from './ItemWrapper';
 
@@ -27,6 +27,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask } : Task
       keyExtractor={item => String(item.id)}
       contentContainerStyle={{ paddingBottom: 24 }}
       showsVerticalScrollIndicator={false}
+      ListFooterComponent={<View style={styles.footerFlatList}/>}
       renderItem={({ item, index }) => {
         return (
           <ItemWrapper index={index}>
@@ -46,3 +47,9 @@ export function TasksList({ tasks, toggleTaskDone, removeTask, editTask } : Task
     />
   )
 }
+
+const styles = StyleSheet.create({
+  footerFlatList: {
+    height: Dimensions.get('screen').height ? Dimensions.get('screen').height/2 : 500,
+  }
+})
