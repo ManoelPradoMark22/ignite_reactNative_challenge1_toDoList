@@ -70,7 +70,10 @@ export function Home() {
 
   return (
     <View style={styles.container}>
-      <Header tasksCounter={tasks.length} />
+      <Header 
+        tasksCounter={tasks.length} 
+        tasksDoneCounter={(tasks.filter(task => task.done).length)} 
+      />
 
       <TodoInput addTask={handleAddTask} />
 
