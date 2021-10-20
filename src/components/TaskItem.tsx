@@ -92,7 +92,6 @@ export function TaskItem({ tasks, item, index, toggleTaskDone, removeTask, editT
           value={editedTitle}
           editable={isEditing}
           onChangeText={setEditedTitle}
-          onSubmitEditing={handleSubmitEditing}
           style={item.done ? styles.taskTextDone : styles.taskText}
         />
       </TouchableOpacity>
