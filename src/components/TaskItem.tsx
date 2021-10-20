@@ -46,37 +46,35 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
   }, [isEditing])
 
   return (
-    <>
-      <View>
-        <TouchableOpacity
-          testID={`button-${index}`}
-          activeOpacity={0.7}
-          style={styles.taskButton}
-          onPress={() => toggleTaskDone(item.id)}
+    <View style={styles.boxContainer}>
+      <TouchableOpacity
+        testID={`button-${index}`}
+        activeOpacity={0.7}
+        style={styles.taskButton}
+        onPress={() => toggleTaskDone(item.id)}
+      >
+        <View 
+          testID={`marker-${index}`}
+          style={item.done ? styles.taskMarkerDone : styles.taskMarker} 
         >
-          <View 
-            testID={`marker-${index}`}
-            style={item.done ? styles.taskMarkerDone : styles.taskMarker} 
-          >
-            { item.done && (
-              <Icon 
-                name="check"
-                size={12}
-                color="#FFF"
-              />
-            )}
-          </View>
+          {item.done && (
+            <Icon 
+              name="check"
+              size={12}
+              color="#FFF"
+            />
+          )}
+        </View>
 
-          <TextInput
-            ref={textInputRef}
-            value={editedTitle}
-            editable={isEditing}
-            onChangeText={setEditedTitle}
-            onSubmitEditing={handleSubmitEditing}
-            style={item.done ? styles.taskTextDone : styles.taskText}
-          />
-        </TouchableOpacity>
-      </View>
+        <TextInput
+          ref={textInputRef}
+          value={editedTitle}
+          editable={isEditing}
+          onChangeText={setEditedTitle}
+          onSubmitEditing={handleSubmitEditing}
+          style={item.done ? styles.taskTextDone : styles.taskText}
+        />
+      </TouchableOpacity>
       
       <View style={ styles.iconsContainer }>
 
@@ -105,11 +103,15 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
           <Image source={trashIcon} style={{ opacity: isEditing ? 0.2 : 1 }} />
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  boxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   taskButton: {
     flex: 1,
     paddingHorizontal: 24,
@@ -149,6 +151,7 @@ const styles = StyleSheet.create({
   },
   iconsContainer: {
     flexDirection: 'row',
+    paddingLeft: 15
   },
   iconsDivider: {
     width: 1,
