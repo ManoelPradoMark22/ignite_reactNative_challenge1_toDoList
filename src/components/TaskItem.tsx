@@ -10,6 +10,7 @@ import editIcon from '../assets/icons/edit/edit.png';
 import checkIcon from '../assets/icons/check/check.png';
 
 interface TaskItemProps {
+  tasks: Task[];
   item: Task;
   index: number;
   toggleTaskDone: (id: number) => void;
@@ -17,7 +18,7 @@ interface TaskItemProps {
   editTask: (({ taskId, taskNewTitle } : EditTaskProps) => void);
 }
 
-export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } : TaskItemProps) {
+export function TaskItem({ tasks, item, index, toggleTaskDone, removeTask, editTask } : TaskItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(item.title);
   const textInputRef = useRef<TextInput>(null);
@@ -40,6 +41,14 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       )
+    } else if(tasks.find(task => task.title === editedTitle)) {
+        Alert.alert(
+          "Task já cadastrada",
+          "Você não pode cadastrar uma task com o mesmo nome",
+          [
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ]
+        )
     } else {
         editTask({taskId: item.id, taskNewTitle: editedTitle});
         setIsEditing(false);
