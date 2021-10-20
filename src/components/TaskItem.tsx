@@ -68,6 +68,7 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
 
         <TextInput
           ref={textInputRef}
+          multiline
           value={editedTitle}
           editable={isEditing}
           onChangeText={setEditedTitle}
