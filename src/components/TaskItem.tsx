@@ -41,7 +41,7 @@ export function TaskItem({ tasks, item, index, toggleTaskDone, removeTask, editT
           { text: "OK", onPress: () => console.log("OK Pressed") }
         ]
       )
-    } else if(tasks.find(task => task.title === editedTitle)) {
+    } else if(tasks.find(task => task.title === editedTitle && task.id !== item.id)) {
         Alert.alert(
           "Task já cadastrada",
           "Você não pode cadastrar uma task com o mesmo nome",
