@@ -83,7 +83,7 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
         { isEditing ? (
           <>
             <TouchableOpacity
-            onPress={() => {}}
+            onPress={handleSubmitEditing}
             style={{paddingRight: 12}}
             >
               <Image source={checkIcon} />
