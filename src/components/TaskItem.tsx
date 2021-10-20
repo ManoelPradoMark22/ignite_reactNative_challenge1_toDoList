@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Image, TouchableOpacity, View, TextInput , StyleSheet } from 'react-native';
+import { Image, TouchableOpacity, View, TextInput , StyleSheet, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { Task } from '../components/TasksList';
@@ -32,8 +32,18 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
   }
 
   function handleSubmitEditing() {
-    editTask({taskId: item.id, taskNewTitle: editedTitle});
-    setIsEditing(false);
+    if (editedTitle==='') {
+      Alert.alert(
+        "Task vazia",
+        "Você não pode cadastrar uma task vazia",
+        [
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ]
+      )
+    } else {
+        editTask({taskId: item.id, taskNewTitle: editedTitle});
+        setIsEditing(false);
+    }
   }
 
   useEffect(() => {
