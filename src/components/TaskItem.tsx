@@ -7,6 +7,7 @@ import { EditTaskProps } from '../pages/Home';
 
 import trashIcon from '../assets/icons/trash/trash.png';
 import editIcon from '../assets/icons/edit/edit.png';
+import checkIcon from '../assets/icons/check/check.png';
 
 interface TaskItemProps {
   item: Task;
@@ -80,11 +81,20 @@ export function TaskItem({ item, index, toggleTaskDone, removeTask, editTask } :
       <View style={ styles.iconsContainer }>
 
         { isEditing ? (
-          <TouchableOpacity
-            onPress={handleCancelEditing}
-          >
-            <Icon name="x" size={24} color="#b2b2b2" />
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity
+            onPress={() => {}}
+            style={{paddingRight: 12}}
+            >
+              <Image source={checkIcon} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleCancelEditing}
+            >
+              <Icon name="x" size={24} color="#b2b2b2" />
+            </TouchableOpacity>
+          </>
         ) : (
           <TouchableOpacity
             onPress={handleStartEditing}
