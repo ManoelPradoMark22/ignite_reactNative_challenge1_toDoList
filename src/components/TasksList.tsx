@@ -28,7 +28,8 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
       renderItem={({ item, index }) => {
         return (
           <ItemWrapper index={index}>
-            <View>
+            <View style={styles.boxContainer}>
+            <View style={styles.boxLeft}>
               <TouchableOpacity
                 testID={`button-${index}`}
                 activeOpacity={0.7}
@@ -63,6 +64,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
             >
               <Image source={trashIcon} />
             </TouchableOpacity>
+            </View>
           </ItemWrapper>
         )
       }}
@@ -74,6 +76,13 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
 }
 
 const styles = StyleSheet.create({
+  boxLeft: {
+    flex: 1,
+  },
+  boxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   taskButton: {
     flex: 1,
     paddingHorizontal: 24,
